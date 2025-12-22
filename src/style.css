@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg-light: #fff;
+  --color-surface-light: #d3d6da;
+  --color-border-light: #878a8c;
+  --color-text-light: #000;
+  --color-wordle-correct-light: #6aaa64;
+  --color-wordle-present-light: #c9b458;
+  --color-wordle-absent-light: #787c7e;
+
+  --color-bg-dark: #121213;
+  --color-surface-dark: #818384;
+  --color-border-dark: #565758;
+  --color-text-dark: #f8f8f8;
+  --color-wordle-correct-dark: #538d4e;
+  --color-wordle-present-dark: #b59f3b;
+  --color-wordle-absent-dark: #3a3a3c;
+}
+
+:root {
+  font-family: "Libre Franklin", sans-serif;
+  @apply bg-bg-light dark:bg-bg-dark;
+}
