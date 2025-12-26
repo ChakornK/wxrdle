@@ -32,7 +32,7 @@ export const Home = () => {
 
   return (
     <ConstraintProvider>
-      <main class="text-text-light dark:text-text-dark h-full p-8">
+      <main class="text-text-light dark:text-text-dark h-full py-8">
         <div class="m-auto flex h-full w-fit flex-col items-center gap-6">
           <h1 class="text-4xl font-bold">Wordle Solutions</h1>
 
@@ -146,17 +146,17 @@ const Keyboard = ({
           key={i}
         >
           {i === keys.length - 1 && (
-            <button class="w-16 text-[0.625em]" onClick={onEnter}>
+            <button class="w-12 text-[0.625em] sm:w-16" onClick={onEnter}>
               enter
             </button>
           )}
           {row.map((key, j) => (
-            <button key={j} class="w-10" onClick={() => onInput(key)}>
+            <button key={j} class="w-6 sm:w-10" onClick={() => onInput(key)}>
               {key}
             </button>
           ))}
           {i === keys.length - 1 && (
-            <button class="w-16" onClick={onDelete}>
+            <button class="w-12 sm:w-16" onClick={onDelete}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 height="20"
