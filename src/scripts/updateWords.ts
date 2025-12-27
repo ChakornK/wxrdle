@@ -1,9 +1,8 @@
 import { writeFileSync } from "node:fs";
-import { Solutions } from "../types/wordle.js";
+import { Solutions } from "../types/wordle";
+import { SOLUTIONS } from "../data/wordle/solutions";
 
-const solutions = (await import(
-  "../data/wordle/solutions.js"
-)) as never as Solutions;
+const solutions = SOLUTIONS as Solutions;
 
 const getApiUrl = (date: string) =>
   `https://www.nytimes.com/svc/wordle/v2/${date}.json`;
@@ -39,7 +38,7 @@ const newSolutionsCode = `// THIS FILE IS AUTO-GENERATED. DO NOT EDIT.
 export const SOLUTIONS = ${JSON.stringify(newSolutions, null, 2)};`;
 
 writeFileSync(
-  new URL("../data/wordle/solutions.js", import.meta.url),
+  new URL("../data/wordle/solutions.ts", import.meta.url),
   newSolutionsCode
 );
 
