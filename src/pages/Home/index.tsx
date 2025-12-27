@@ -53,7 +53,9 @@ const App = () => {
 
   useEffect(() => {
     setGuesses(
-      rawGuesses.map((guess) => guessResult(guess, targetSolution) || [])
+      rawGuesses
+        .slice(0, 6)
+        .map((guess) => guessResult(guess, targetSolution) || [])
     );
 
     if (rawGuesses.length === 0) return;
