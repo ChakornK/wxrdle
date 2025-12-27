@@ -1,9 +1,9 @@
 import { LetterStatus, type WordleGuess } from "../types/wordle";
 
 const variants = [
-  "bg-wordle-absent-light dark:bg-wordle-absent-dark",
-  "bg-wordle-present-light dark:bg-wordle-present-dark",
-  "bg-wordle-correct-light dark:bg-wordle-correct-dark",
+  "text-text-dark bg-wordle-absent-light dark:bg-wordle-absent-dark",
+  "text-text-dark bg-wordle-present-light dark:bg-wordle-present-dark",
+  "text-text-dark bg-wordle-correct-light dark:bg-wordle-correct-dark",
   "border border-2 border-border-light dark:border-border-dark",
   "border border-2 border-border-faint-light dark:border-border-faint-dark",
 ];
