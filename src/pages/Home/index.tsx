@@ -170,8 +170,8 @@ const App = () => {
           <button
             class="border-text-light dark:border-text-dark cursor-pointer rounded-full border px-4 py-2"
             onClick={(e) => {
-              resetBoard();
               (e.target as HTMLButtonElement).blur();
+              resetBoard();
             }}
           >
             Reset
@@ -179,15 +179,16 @@ const App = () => {
           <button
             class="border-text-light dark:border-text-dark cursor-pointer rounded-full border px-4 py-2"
             onClick={(e) => {
-              setRawGuesses(rawGuesses.slice(0, -1));
               (e.target as HTMLButtonElement).blur();
+              setRawGuesses(rawGuesses.slice(0, -1));
             }}
           >
             Undo
           </button>
           <button
             class="bg-text-light dark:bg-text-dark text-bg-light dark:text-bg-dark cursor-pointer rounded-full px-4 py-2"
-            onClick={() => {
+            onClick={(e) => {
+              (e.target as HTMLButtonElement).blur();
               if (rawGuesses.length >= 6) return;
               const w = nextWord(constraints);
               setRawGuesses([...rawGuesses, w]);
