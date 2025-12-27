@@ -41,10 +41,43 @@ const App = () => {
   }, []);
 
   useEffect(() => {
+    setRawGuesses([]);
+    setSolutionSelectorVisible(false);
+    setConstraints({
+      absent: [],
+      present: [],
+      incorrect: {},
+      correct: {},
+    });
+  }, [targetSolution]);
+
+  useEffect(() => {
     setGuesses(
       rawGuesses.map((guess) => guessResult(guess, targetSolution) || [])
     );
-  }, [rawGuesses, targetSolution]);
+
+    if (rawGuesses.length === 0) return;
+    const res = guessResult(rawGuesses[rawGuesses.length - 1], targetSolution);
+    const newConstraints = constraints;
+    for (let i = 0; i < 5; i++) {
+      if (res[i].status === LetterStatus.correct) {
+        newConstraints.correct[i] = res[i].letter;
+        if (newConstraints.present.indexOf(res[i].letter) === -1)
+          newConstraints.present.push(res[i].letter);
+      } else if (res[i].status === LetterStatus.present) {
+        newConstraints.incorrect[i] = [
+          ...(newConstraints.incorrect[i] || []),
+          res[i].letter,
+        ];
+        if (newConstraints.present.indexOf(res[i].letter) === -1)
+          newConstraints.present.push(res[i].letter);
+      } else if (res[i].status === LetterStatus.absent) {
+        newConstraints.absent.push(res[i].letter);
+      }
+    }
+    setConstraints(newConstraints);
+    console.log(newConstraints);
+  }, [rawGuesses]);
 
   return (
     <>
@@ -94,27 +127,6 @@ const App = () => {
             const w = nextWord(constraints);
             setRawGuesses([...rawGuesses, w]);
             setPendingGuess("");
-
-            const res = guessResult(w, targetSolution);
-            const newConstraints = constraints;
-            for (let i = 0; i < 5; i++) {
-              if (res[i].status === LetterStatus.correct) {
-                newConstraints.correct[i] = res[i].letter;
-                if (newConstraints.present.indexOf(res[i].letter) === -1)
-                  newConstraints.present.push(res[i].letter);
-              } else if (res[i].status === LetterStatus.present) {
-                newConstraints.incorrect[i] = [
-                  ...(newConstraints.incorrect[i] || []),
-                  res[i].letter,
-                ];
-                if (newConstraints.present.indexOf(res[i].letter) === -1)
-                  newConstraints.present.push(res[i].letter);
-              } else if (res[i].status === LetterStatus.absent) {
-                newConstraints.absent.push(res[i].letter);
-              }
-            }
-            setConstraints(newConstraints);
-            console.log(newConstraints);
           }}
         >
           Suggest a guess
@@ -153,8 +165,6 @@ const App = () => {
             <SolutionsList
               onClick={(word) => {
                 setTargetSolution(word);
-                setRawGuesses([]);
-                setSolutionSelectorVisible(false);
               }}
             />
           </div>
