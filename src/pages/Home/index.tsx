@@ -32,7 +32,7 @@ const App = () => {
   const [targetSolution, setTargetSolution] = useState<string>("");
 
   const [solutionSelectorVisible, setSolutionSelectorVisible] =
-    useState<boolean>(true);
+    useState<boolean>(false);
 
   const resetBoard = useCallback(() => {
     setRawGuesses([]);
