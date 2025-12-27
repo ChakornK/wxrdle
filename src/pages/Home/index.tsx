@@ -14,12 +14,37 @@ import { WORDS } from "../../data/wordle/words";
 import { Overlay } from "../../components/Overlay";
 
 export const Home = () => {
+  const [consented, setConsented] = useState<boolean>(false);
+
   return (
     <ConstraintProvider>
-      <main class="text-text-light dark:text-text-dark h-full py-8">
-        <App />
+      <main class="text-text-light dark:text-text-dark h-dvh py-8">
+        {consented ? (
+          <App />
+        ) : (
+          <Consent onContinue={() => setConsented(true)} />
+        )}
       </main>
     </ConstraintProvider>
+  );
+};
+
+const Consent = ({ onContinue }: { onContinue: () => void }) => {
+  return (
+    <div class="flex h-full flex-col items-center justify-center gap-1 px-4 text-center">
+      <h1 class="text-4xl font-bold">Wordle Solver</h1>
+      <p>Get the best guess suggestions for today's Wordle</p>
+      <p>
+        Warning: The page will show the Wordle solutions for today and the next
+        few days
+      </p>
+      <button
+        onClick={onContinue}
+        class="bg-text-light dark:bg-text-dark text-bg-light dark:text-bg-dark mt-4 cursor-pointer rounded-full px-4 py-2"
+      >
+        Get started
+      </button>
+    </div>
   );
 };
 
