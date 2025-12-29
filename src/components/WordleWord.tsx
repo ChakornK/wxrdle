@@ -61,9 +61,6 @@ const WordleLetter = ({
   status: LetterStatus;
 }) => {
   const [scope, animate] = useAnimate();
-  const [typed, setTyped] = useState<boolean>(
-    status === LetterStatus.pending + 1
-  );
 
   useEffect(() => {
     if (status === LetterStatus.pending && letter !== "") {
