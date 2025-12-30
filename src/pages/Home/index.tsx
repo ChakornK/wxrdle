@@ -61,7 +61,9 @@ const getWordleDate = (targetSolution: string) => {
       ([_, { word }]) => word.toLowerCase() === targetSolution.toLowerCase()
     );
   if (future) {
-    return `${new Date(future[0])
+    return `${new Date(
+      Date.parse(future[0]) - -new Date().getTimezoneOffset() * 60000
+    )
       .toDateString()
       .split(" ")
       .slice(1, 3)
