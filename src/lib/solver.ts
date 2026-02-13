@@ -43,27 +43,15 @@ export const nextWord = (constraints: Constraints) => {
     return w[Math.floor(Math.random() * w.length)];
   }
 
-  let candidates = WORDS.filter((word) =>
-    word.split("").some((l) => lettersByFreq.find(([lf]) => lf === l)),
-  );
-  const strictCandidates = candidates
-    .filter((word) => !constraints.absent.some((l) => word.includes(l)))
-    .filter((word) =>
-      word
-        .split("")
-        .every((l, i) => !(constraints.incorrect[i] || []).includes(l)),
-    )
-    .filter((word) =>
-      word
-        .split("")
-        .every((l, i) =>
-          constraints.correct[i] ? constraints.correct[i] === l : true,
-        ),
-    );
-  console.log("Possible words", strictCandidates);
+  let candidates = [];
+  console.log("Possible words", w);
   // If there are <=2 candidates, guess one of them instead of eliminating
-  if (strictCandidates.length <= 2) {
-    candidates = strictCandidates;
+  if (w.length <= 2) {
+    candidates = w;
+  } else {
+    WORDS.filter((word) =>
+      word.split("").some((l) => lettersByFreq.find(([lf]) => lf === l)),
+    );
   }
   const candidatesRanked = candidates
     .map((word) => {
