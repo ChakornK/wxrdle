@@ -49,7 +49,7 @@ export const nextWord = (constraints: Constraints) => {
   if (w.length <= 2) {
     candidates = w;
   } else {
-    WORDS.filter((word) =>
+    candidates = WORDS.filter((word) =>
       word.split("").some((l) => lettersByFreq.find(([lf]) => lf === l)),
     );
   }
