@@ -36,15 +36,34 @@ export const nextWord = (constraints: Constraints) => {
   const freq = letterFreq(w);
 
   const lettersByFreq = Object.entries(freq).filter(
-    ([l]) => !constraints.present.includes(l),
+    ([l]) =>
+      !constraints.present.includes(l) && !constraints.absent.includes(l),
   );
   if (lettersByFreq.length == 0) {
     return w[Math.floor(Math.random() * w.length)];
   }
 
-  const candidates = WORDS.filter((word) =>
+  let candidates = WORDS.filter((word) =>
     word.split("").some((l) => lettersByFreq.find(([lf]) => lf === l)),
   );
+  const strictCandidates = candidates
+    .filter((word) => !constraints.absent.some((l) => word.includes(l)))
+    .filter((word) =>
+      word
+        .split("")
+        .every((l, i) => !(constraints.incorrect[i] || []).includes(l)),
+    )
+    .filter((word) =>
+      word
+        .split("")
+        .every((l, i) =>
+          constraints.correct[i] ? constraints.correct[i] === l : true,
+        ),
+    );
+  // If there are <=2 candidates, guess one of them instead of eliminating
+  if (strictCandidates.length <= 2) {
+    candidates = strictCandidates;
+  }
   const candidatesRanked = candidates
     .map((word) => {
       return [
