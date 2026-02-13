@@ -19,7 +19,7 @@ export const WordleWord = ({
 }) => {
   const [scope, animate] = useAnimate();
   const [pending, setPending] = useState<boolean>(
-    guess.every((l) => l.status === LetterStatus.pending)
+    guess.every((l) => l.status === LetterStatus.pending),
   );
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export const WordleWord = ({
         },
         {
           duration: 0,
-        }
+        },
       );
     }
   }, [forceGreen]);
@@ -48,7 +48,7 @@ export const WordleWord = ({
           delay: stagger(0.25),
           duration: 0.5,
           times: [0, 0.5, 0.5, 1],
-        }
+        },
       );
       animate(
         ".letter-back",
@@ -58,7 +58,7 @@ export const WordleWord = ({
         {
           delay: stagger(0.25),
           duration: 0.5,
-        }
+        },
       );
     }
   }, [pending]);
@@ -88,7 +88,7 @@ const WordleLetter = ({
       animate(
         scope.current,
         { scale: [1, 1.2, 1] },
-        { duration: 0.1, times: [0, 0.3, 1] }
+        { duration: 0.1, times: [0, 0.3, 1] },
       );
     }
   }, [letter]);

@@ -14,7 +14,7 @@ import { WORDS } from "../../data/wordle/words";
 import { Overlay } from "../../components/Overlay";
 
 const currentDate = new Date(
-  Date.now() - new Date().getTimezoneOffset() * 60000
+  Date.now() - new Date().getTimezoneOffset() * 60000,
 );
 export const Home = () => {
   const [consented, setConsented] = useState<boolean>(false);
@@ -58,11 +58,11 @@ const getWordleDate = (targetSolution: string) => {
   const future =
     targetSolution &&
     Object.entries(SOLUTIONS).find(
-      ([_, { word }]) => word.toLowerCase() === targetSolution.toLowerCase()
+      ([_, { word }]) => word.toLowerCase() === targetSolution.toLowerCase(),
     );
   if (future) {
     return `${new Date(
-      Date.parse(future[0]) - -new Date().getTimezoneOffset() * 60000
+      Date.parse(future[0]) - -new Date().getTimezoneOffset() * 60000,
     )
       .toDateString()
       .split(" ")
@@ -137,7 +137,7 @@ const App = () => {
       }
     }
     newConstraints.absent = newConstraints.absent.filter(
-      (letter) => !newConstraints.present.includes(letter)
+      (letter) => !newConstraints.present.includes(letter),
     );
     setConstraints(newConstraints);
     console.log(newConstraints);
@@ -292,7 +292,7 @@ const GameBoard = ({
       {Array.from({ length: (pending ? 5 : 6) - guesses.length }).map(
         (_, i) => (
           <WordleWord guess={[]} />
-        )
+        ),
       )}
     </div>
   );
@@ -415,7 +415,7 @@ const SolutionsList = ({ onClick }: { onClick: (word: string) => void }) => {
                 .map((letter) => ({ letter, status: LetterStatus.correct }))}
             />
           </button>
-        )
+        ),
       )}
     </div>
   );

@@ -39,7 +39,7 @@ export const SOLUTIONS = ${JSON.stringify(newSolutions, null, 2)};`;
 
 writeFileSync(
   new URL("../data/wordle/solutions.ts", import.meta.url),
-  newSolutionsCode
+  newSolutionsCode,
 );
 
 export {};

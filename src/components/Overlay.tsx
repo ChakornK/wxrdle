@@ -16,7 +16,7 @@ export const Overlay = ({
           {children}
         </div>
       ),
-      document.body
+      document.body,
     )
   );
 };

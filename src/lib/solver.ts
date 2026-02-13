@@ -10,7 +10,7 @@ export type Constraints = {
 
 export const nextWord = (constraints: Constraints) => {
   let w = WORDS.filter(
-    (word) => !constraints.absent.some((l) => word.includes(l))
+    (word) => !constraints.absent.some((l) => word.includes(l)),
   );
   if (constraints.present.length > 0) {
     w = w.filter((word) => constraints.present.every((l) => word.includes(l)));
@@ -19,14 +19,14 @@ export const nextWord = (constraints: Constraints) => {
     .filter((word) =>
       word
         .split("")
-        .every((l, i) => !(constraints.incorrect[i] || []).includes(l))
+        .every((l, i) => !(constraints.incorrect[i] || []).includes(l)),
     )
     .filter((word) =>
       word
         .split("")
         .every((l, i) =>
-          constraints.correct[i] ? constraints.correct[i] === l : true
-        )
+          constraints.correct[i] ? constraints.correct[i] === l : true,
+        ),
     );
 
   if (w.length == 1) {
@@ -36,14 +36,14 @@ export const nextWord = (constraints: Constraints) => {
   const freq = letterFreq(w);
 
   const lettersByFreq = Object.entries(freq).filter(
-    ([l]) => !constraints.present.includes(l)
+    ([l]) => !constraints.present.includes(l),
   );
   if (lettersByFreq.length == 0) {
     return w[Math.floor(Math.random() * w.length)];
   }
 
   const candidates = WORDS.filter((word) =>
-    word.split("").some((l) => lettersByFreq.find(([lf]) => lf === l))
+    word.split("").some((l) => lettersByFreq.find(([lf]) => lf === l)),
   );
   const candidatesRanked = candidates
     .map((word) => {
@@ -51,14 +51,14 @@ export const nextWord = (constraints: Constraints) => {
         word,
         [...new Set(word.split(""))]
           .map(
-            (l) => (lettersByFreq.find(([lf]) => lf === l) || [0, -1])[1] + 1
+            (l) => (lettersByFreq.find(([lf]) => lf === l) || [0, -1])[1] + 1,
           )
           .reduce((a, b) => a + b, 0),
       ];
     })
     .sort((a: [string, number], b: [string, number]) => b[1] - a[1]) as [
     string,
-    number
+    number,
   ][];
 
   const maxScore = candidatesRanked.reduce((a, b) => Math.max(a, b[1]), 0);
@@ -78,14 +78,14 @@ export const nextWord = (constraints: Constraints) => {
             (l) =>
               (Object.entries(allWordsLetterFreq).find(([lf]) => lf === l) || [
                 0, -1,
-              ])[1] + 1
+              ])[1] + 1,
           )
           .reduce((a, b) => a + b, 0),
       ];
     })
     .sort((a: [string, number], b: [string, number]) => b[1] - a[1]) as [
     string,
-    number
+    number,
   ][];
   return bestCandidateByFreq[0][0];
 };
