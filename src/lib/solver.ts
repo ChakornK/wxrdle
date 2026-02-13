@@ -60,6 +60,7 @@ export const nextWord = (constraints: Constraints) => {
           constraints.correct[i] ? constraints.correct[i] === l : true,
         ),
     );
+  console.log("Possible words", strictCandidates);
   // If there are <=2 candidates, guess one of them instead of eliminating
   if (strictCandidates.length <= 2) {
     candidates = strictCandidates;
