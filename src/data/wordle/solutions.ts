@@ -1,9 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT EDIT.
 export const SOLUTIONS = {
-  "2026-10-11": {
-    "id": 1940,
-    "word": "uncap"
-  },
   "2026-10-12": {
     "id": 1941,
     "word": "yodel"
@@ -27,5 +23,9 @@ export const SOLUTIONS = {
   "2026-10-17": {
     "id": 1946,
     "word": "gaffe"
+  },
+  "2026-10-18": {
+    "id": 1947,
+    "word": "adorn"
   }
 };
